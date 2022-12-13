@@ -28,7 +28,7 @@
     <div class="">
         <div class="row">
       
-          <div class="col-2">
+          {{-- <div class="col-2">
             <h2>Welcome!</h2>
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -44,9 +44,9 @@
                 <a class="nav-link" href="/allstaff">Categories</a>
               </li>
             </ul>
-          </div>          
+          </div>           --}}
 
-    <div class="col-10">
+    <div class="col-12">
         <div class="card">
           <h5 class="card-header">Sales</h5>
           <div class="card-body">

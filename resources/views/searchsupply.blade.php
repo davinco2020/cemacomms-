@@ -70,6 +70,7 @@
                     <th>Quantity</th>
                     <th>Cost</th>
                     <th>Total</th>
+                    <th>Update</th>
 
 
                 </tr>

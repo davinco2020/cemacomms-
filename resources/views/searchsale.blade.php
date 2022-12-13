@@ -70,7 +70,7 @@
                     <th>Quantity</th>
                     <th>Cost</th>
                     <th>Total</th>
-                    <th>Action</th>
+                    {{-- <th>Action</th> --}}
 
 
 
@@ -87,6 +87,8 @@
                 <td>{{ $sale->quantity }}</td>
                 <td>{{ $sale->cost }}</td>
                 <td>{{ $sale->total }}</td>
+                {{-- <td><a href="delete/{{ $sale->id }}">Delete</a></td> --}}
+
                 {{-- <td>{{ $sale['total'] }}</td> --}}
 
 

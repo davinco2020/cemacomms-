@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\sales;
 use App\Models\stocks;
+use App\Models\products;
+
 
 
 use Illuminate\Support\Facades\DB;
@@ -35,6 +37,9 @@ class DavecrudController extends Controller
         $search= DB::select("select COST from stocks where phone='$req->phone' ");
         return view('sales', compact('search'));
     }
+    public function deletesale(Request $req ){
+        return 'you can delete from here';
+    }
     public function savesale(Request $req){
        
 
@@ -56,16 +61,6 @@ class DavecrudController extends Controller
         return view('print', 'mkt');
     }
     public function savestock(Request $req){
-//         $stocks = new stocks;
-//         $stocks-> name = $req->input('name');
-//         $stocks-> address = $req->input('address');
-//         $stocks-> phone = $req->input('phone');
-//         $stocks-> date = $req->input('date');
-//         $stocks-> item = $req->input('item');
-//         $stocks-> quantity = $req->input('qty');
-//         $stocks-> cost = $req->input('cost');
-//         $stocks-> total = $req->input('tot');
-// $stocks->save();
         DB::table('stocks')->insert([
             'supplier'=>$req->supplier,
             'address'=>$req->address,
@@ -75,9 +70,50 @@ class DavecrudController extends Controller
             'cost'=>$req->cost,
             'total'=>$req->total,
             'date'=>$req->date,
+            'profit'=>$req->profit,
+            'sell'=>$req->sp,
+
         ]);
-        return view('newstock');
+        $id= $req->id;
+        // $product = array(
+        //     'model'=>$req->product,
+        //     'quantity'=>$req->quantity,
+        //     'price'=>$req->cost,
+
+        // );
+        // $sold=DB::table('stocks')
+        // ->where('product', '=', $req->item)
+        // ->decrement('quantity', $req->qty);
+
+
+        // $result = DB::table('products')->upsert([
+        //    [ 'model'=>$req->product,
+        //     'price'=>$req->cost,
+        // ],
+        // ['model', 'price']], ['quantity']);
+        // $result= DB::table('products')->where('model', '=', 
+        // $req->product);
+       $bill11=DB::select("select * from products where model='$req->product' ");
+         DB::table('products')->where('model', '=', 
+        $req->product);
+
+if($bill11){
+
+        $bill12= DB::table('products')->where('model', '=', 
+        $req->product)->increment('quantity', $req->quantity);
+       
+  }else{
+DB::table('products')->insert([
+    'model'=>$req->product,
+    'quantity'=>$req->quantity,
+    'price'=>$req->cost,
+
+]);
+}
+     return 'hey you'; 
     }
+
+
     public function allsales(){
         $allsale= sales::all();
         $sum= DB::table('sales')->sum('total');
@@ -175,7 +211,12 @@ public function searchproduct(Request $req){
         
         return view('searchsales', compact ('searchsales'));
     }
-
+    public function newstock (Request $req){
+        
+        $allstocss= stocks::all();
+    
+        return view('newstock', compact ('allstocss'));
+    }
 
     public function staff(Request $req){
         DB::table('staff')->insert([

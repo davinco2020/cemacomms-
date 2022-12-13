@@ -34,7 +34,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/first">Home</a>
+            <a class="nav-link active" aria-current="page" href="/newstock">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/sell">Sales</a>
@@ -55,25 +55,10 @@
       </div>
     </div>
   </nav>
-
-      <div class="container">
-<div class="row">
-  <div class="col-2">
-@yield('set')
-  </div>
-  <div class="col-10">
-  
-  @yield('content')
-            
-          
-            
-        </main>
-  </div>
-  {{-- <div class="col-sm-6"> 
-   
-    hi everyone</div>
-</div> --}}
-      </div>
+  <main class="container">
+    @yield('content')
+</main>
+      
     </div>
 </body>
 </html>

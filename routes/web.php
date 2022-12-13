@@ -74,7 +74,11 @@ Route::get('/findproductname', [DavecrudController::class, 'findproductname']);
 Route::view('/sales1', 'saleslink');
 
 Route::view('/saleslink', 'saleslink');
-Route::view('/newstock', 'newstock');
+Route::get('/newstock', [DavecrudController::class, 'newstock']);
+Route::get('/delete/{id}', [DavecrudController::class, 'deletesale']);
+Route::get('/updateprice', [DavecrudController::class, 'updateprice']);
+
+
 
 
 Route::view('/staff', 'staff');

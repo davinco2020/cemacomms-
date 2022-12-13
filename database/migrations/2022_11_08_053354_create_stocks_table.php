@@ -23,6 +23,9 @@ class CreateStocksTable extends Migration
             $table->integer('cost');
             $table->integer('total');
             $table->string('date');
+            $table->string('profit');
+            $table->string('sell');
+
 
 
 
