@@ -23,6 +23,9 @@
             <a class="nav-link active" aria-current="page" href="/newstock">New Stock</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/products">Available Producs</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/allstocks">Old Stocks</a>
           </li>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -129,17 +132,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form method='post' action='/updateprice' id="updateprice">
+      <form method='post' action='/updateprice' id="updateprices">
         @csrf
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Beginning Date</label>
     
-      <select name='supplier' id='itemphone' class="form-control" data-dependent="state">
+      <select name='phone1' id='itemphone' class="form-control" data-dependent="state">
           
       
         <option value=''>Select Phone</option> 
-        @foreach ($allstocss as $stoc)
-        <option>{{ $stoc->product }}</option>
+        @foreach ($allproducts as $stoc)
+        <option>{{ $stoc->model }}</option>
         @endforeach
 
       </select>
@@ -157,7 +160,7 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">New Price</label>
-    <input type="text" class="form-control" name='price' id="newprice" value='' id="exampleInputPassword1">
+    <input type="text" class="form-control" name='newprice' id="newprice" value='' id="exampleInputPassword1">
   </div>
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -193,7 +196,16 @@ $("#cost, #quantity, #sell").keyup(function(){
 
   $(document).on('click', '#submitprice', function (e) {
   e.preventDefault();
-  alert('you clicked update');
+  alert('price has been updated');
+  $.ajax({
+    type: "post",
+    url: "/updateprice",
+    data: $('#updateprices').serialize(),
+    dataType: "dataType",
+    success: function (response) {
+      
+    }
+  });
 
   });
  
@@ -252,7 +264,7 @@ $('#phone').val(" ");
 $(document).on('change', '#itemphone', function () { 
       
       var phone11= $('#itemphone').val();
-      alert(phone11);
+     
       $.ajax({
         type: "GET",
         url: "/findproduct",
@@ -263,9 +275,9 @@ $(document).on('change', '#itemphone', function () {
           console.log(data)
           console.log(data.cost);
           $.each(data.cost, function (key, item) { 
-             console.log(item.cost);
-             $('#price').val(item.cost);
-             $('#rcost').val(item.cost);
+             console.log(item.price);
+             $('#price').val(item.sellingprice);
+             $('#rcost').val(item.sellingprice);
           });
         },
         error:function(){

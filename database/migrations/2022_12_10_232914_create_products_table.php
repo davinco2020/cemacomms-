@@ -17,7 +17,12 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('model');
             $table->string('quantity');
-            $table->string('price');
+            $table->string('costprice');
+            $table->string('sellingprice');
+            $table->string('profit');
+
+
+
             $table->timestamps();
         });
     }

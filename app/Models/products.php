@@ -12,7 +12,9 @@ class products extends Model
     protected $fillable=[
         'model',
         'quantity',
-        'price'
+        'costprice',
+        'sellingprice',
+        'profit',
 
         
     ];

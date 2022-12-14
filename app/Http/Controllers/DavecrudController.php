@@ -53,8 +53,8 @@ class DavecrudController extends Controller
             'cost'=>$req->cost,
             'total'=>$req->tot,
         ]);
-        $sold=DB::table('stocks')
-        ->where('product', '=', $req->item)
+        $sold=DB::table('products')
+        ->where('model', '=', $req->item)
         ->decrement('quantity', $req->qty);
 
         $mkt= sales::all();
@@ -106,7 +106,10 @@ if($bill11){
 DB::table('products')->insert([
     'model'=>$req->product,
     'quantity'=>$req->quantity,
-    'price'=>$req->cost,
+    'costprice'=>$req->cost,
+    'sellingprice'=>$req->sp,
+    'profit'=>$req->profit,
+
 
 ]);
 }
@@ -131,8 +134,9 @@ DB::table('products')->insert([
     }
     public function sell(){
         $allstocs= stocks::all();
+        $allproducts= products::all();
         // return 'welcome to cema';
-        return view('sell', compact('allstocs'));
+        return view('sell', compact('allstocs', 'allproducts'));
     }
     public function searchsale(Request $requ){
         $searchsales = DB::table('sales')
@@ -178,7 +182,7 @@ public function searchproduct(Request $req){
     public function findpro(Request $req){
       //  $searchsales=DB::select("select COST from sales where phone='$req->phone' ");
     //   $cost= Stocks::select('cost')->where('phone', $req->id)->take(100)->get();  
-      $costs=DB::select("select * from stocks where product='$req->id' ");
+      $costs=DB::select("select * from products where model='$req->id' ");
         return response()->json([
             'cost'=>$costs ]);
     }
@@ -214,10 +218,24 @@ public function searchproduct(Request $req){
     public function newstock (Request $req){
         
         $allstocss= stocks::all();
+        $allproducts= products::all();
     
-        return view('newstock', compact ('allstocss'));
+        return view('newstock', compact ('allstocss', 'allproducts'));
     }
+    public function updateprice (Request $req){
+        
+       // $updated= DB::update("update stocks set sell='$req->newprice' where product='$req->phone1'");
+        $updated1= DB::update("update products set sellingprice='$req->newprice' where model='$req->phone1'");
 
+    
+        return 'price updated';
+    }
+    public function products (Request $req){
+        
+        $allproducts= DB:: select('select * from products');
+    
+        return view('products', compact('allproducts'));
+    }
     public function staff(Request $req){
         DB::table('staff')->insert([
             'name'=>$req->name,

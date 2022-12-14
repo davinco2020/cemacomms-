@@ -76,7 +76,9 @@ Route::view('/sales1', 'saleslink');
 Route::view('/saleslink', 'saleslink');
 Route::get('/newstock', [DavecrudController::class, 'newstock']);
 Route::get('/delete/{id}', [DavecrudController::class, 'deletesale']);
-Route::get('/updateprice', [DavecrudController::class, 'updateprice']);
+Route::post('/updateprice', [DavecrudController::class, 'updateprice']);
+Route::get('/products', [DavecrudController::class, 'products']);
+
 
 
 

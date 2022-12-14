@@ -59,8 +59,8 @@
                     
                 
                   <option value=''>Select Phone</option> 
-                  @foreach ($allstocs as $stoc)
-                  <option>{{ $stoc->product }}</option>
+                  @foreach ($allproducts as $stoc)
+                  <option>{{ $stoc->model }}</option>
                   @endforeach
 
                 </select>
@@ -196,12 +196,11 @@ $(document).on('change', '#price', function () {
         success: function (data) {
          
           console.log('success');
-          console.log(data)
-          console.log(data.cost);
+          
           $.each(data.cost, function (key, item) { 
-             console.log(item.cost);
-             $('#price').val(item.cost);
-             $('#rcost').val(item.cost);
+             console.log(item.sellingprice);
+             $('#price').val(item.sellingprice);
+             $('#rcost').val(item.sellingprice);
           });
         },
         error:function(){
@@ -270,17 +269,17 @@ $('#quantity').val(" ");
 
  
 });
-// $.ajax({
-//   type: "POST",
-//   url: "/sendsales",
-//   data: $('#details').serialize(),
-//   dataType: "datatype",
-//   success: function () {
-//     alert('sent succeful')
-//     $(this).html('');
-//   }
+$.ajax({
+  type: "POST",
+  url: "/sendsales",
+  data: $('#details').serialize(),
+  dataType: "datatype",
+  success: function () {
+    alert('sent succeful')
+    $(this).html('');
+  }
   
-// });
+});
      
      });
         
